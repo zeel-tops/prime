@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>TIC TAC TOE</h1>
+    <div id="status">Player X's turn</div>
+    <div id="board" role="grid" aria-label="Tic Tac Toe board"></div>
+    <button id="reset-btn" type="button">New Game</button>
+  </div>
+
+  <script src="game.js"></script>
+  <script>
+    const boardEl = document.getElementById('board');
+    const statusEl = document.getElementById('status');
+    const resetBtn = document.getElementById('reset-btn');
+
+    let state = createGame();
+    let winningCells = [];
+
+    function getWinningCells(board) {
+      const WIN_LINES = [
+        [0, 1, 2],[3, 4, 5],[6, 7, 8],
+        [0, 3, 6],[1, 4, 7],[2, 5, 8],
+        [0, 4, 8],[2, 4, 6],
+      ];
+      for (const line of WIN_LINES) {
+        const [a, b, c] = line;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+          return line;
+        }
+      }
+      return [];
+    }
+
+    function render() {
+      boardEl.innerHTML = '';
+      winningCells = state.winner ? getWinningCells(state.board) : [];
+      const gameOver = state.winner || state.isDraw;
+
+      state.board.forEach((value, i) => {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.setAttribute('role', 'gridcell');
+        cell.setAttribute('aria-label', `Cell ${i + 1}${value ? `, ${value}` : ''}`);
+        cell.textContent = value || '';
+
+        if (value) {
+          cell.classList.add('taken');
+          cell.dataset.player = value;
+        }
+        if (gameOver) {
+          cell.classList.add('disabled');
+        }
+        if (winningCells.includes(i)) {
+          cell.classList.add('winning');
+        }
+        if (!value && !gameOver) {
+          cell.addEventListener('click', () => handleMove(i));
+        }
+
+        boardEl.appendChild(cell);
+      });
+
+      if (state.winner) {
+        statusEl.textContent = `Player ${state.winner} wins!`;
+      } else if (state.isDraw) {
+        statusEl.textContent = "It's a draw!";
+      } else {
+        statusEl.textContent = `Player ${state.currentPlayer}'s turn`;
+      }
+    }
+
+    function handleMove(index) {
+      const next = makeMove(state, index);
+      if (next === state) return;
+      state = next;
+      render();
+    }
+
+    resetBtn.addEventListener('click', () => {
+      state = createGame();
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

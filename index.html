@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Tic Tac Toe</h1>
+
+    <div class="status" id="status">Player X's turn</div>
+
+    <div class="board" id="board" role="grid" aria-label="Tic Tac Toe board">
+      <button class="cell" data-index="0" aria-label="Cell 1" aria-pressed="false"></button>
+      <button class="cell" data-index="1" aria-label="Cell 2" aria-pressed="false"></button>
+      <button class="cell" data-index="2" aria-label="Cell 3" aria-pressed="false"></button>
+      <button class="cell" data-index="3" aria-label="Cell 4" aria-pressed="false"></button>
+      <button class="cell" data-index="4" aria-label="Cell 5" aria-pressed="false"></button>
+      <button class="cell" data-index="5" aria-label="Cell 6" aria-pressed="false"></button>
+      <button class="cell" data-index="6" aria-label="Cell 7" aria-pressed="false"></button>
+      <button class="cell" data-index="7" aria-label="Cell 8" aria-pressed="false"></button>
+      <button class="cell" data-index="8" aria-label="Cell 9" aria-pressed="false"></button>
+    </div>
+
+    <button class="reset-btn" id="resetBtn">Reset Game</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

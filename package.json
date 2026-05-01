@@ -1,0 +1,11 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "Simple two-player Tic Tac Toe game",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}

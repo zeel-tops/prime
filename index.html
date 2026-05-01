@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Theme Toggle Demo</title>
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body>
+        <script>
+            // Apply the saved theme synchronously before first paint to prevent
+            // a flash of the default light theme when the user prefers dark.
+            (function () {
+                try {
+                    var stored = localStorage.getItem("theme");
+                    var theme =
+                        stored === "light" || stored === "dark"
+                            ? stored
+                            : window.matchMedia &&
+                              window.matchMedia("(prefers-color-scheme: dark)")
+                                  .matches
+                            ? "dark"
+                            : "light";
+                    if (theme === "dark") {
+                        document.body.classList.add("dark-mode");
+                    }
+                } catch (e) {
+                    /* localStorage / matchMedia unavailable — fall back to light */
+                }
+            })();
+        </script>
+        <header class="page-header">
+            <h1>Theme Toggle Demo</h1>
+            <button
+                type="button"
+                class="theme-toggle"
+                data-theme-toggle
+                aria-pressed="false"
+                aria-label="Switch to dark mode"
+            >
+                Dark mode
+            </button>
+        </header>
+        <main class="page-main">
+            <p class="lede">
+                Switch between light and dark themes using the button above.
+                Your preference is saved in your browser and restored on the
+                next visit.
+            </p>
+            <section class="card">
+                <h2>Sample card</h2>
+                <p>
+                    This card uses theme variables for its background, border,
+                    and text colors so it updates instantly when you toggle.
+                </p>
+            </section>
+            <section class="card">
+                <h2>Readability check</h2>
+                <p>
+                    Both themes are designed for sufficient contrast: dark text
+                    on a light background in light mode, and light text on a
+                    dark background in dark mode.
+                </p>
+            </section>
+        </main>
+        <script type="module" src="./theme.mjs"></script>
+    </body>
+</html>

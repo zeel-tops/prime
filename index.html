@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Listing</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>Products</h1>
+    </header>
+
+    <main class="page-main">
+      <div
+        id="status"
+        class="status"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
+
+      <ul id="products" class="products-grid" aria-label="Product list"></ul>
+
+      <nav
+        id="pagination"
+        class="pagination"
+        aria-label="Pagination"
+        hidden
+      >
+        <button id="prev-page" type="button" class="page-button">
+          Previous
+        </button>
+        <span id="page-indicator" class="page-indicator"></span>
+        <button id="next-page" type="button" class="page-button">Next</button>
+      </nav>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
